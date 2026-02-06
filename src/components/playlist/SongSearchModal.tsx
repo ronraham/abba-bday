@@ -8,6 +8,7 @@ import { Loading } from '../common/Loading';
 import { YouTubePlayer } from './YouTubePlayer';
 import { youtubeService } from '../../services/youtubeService';
 import { usePlaylist } from '../../hooks/usePlaylist';
+import { triggerSideConfetti } from '../../utils/confetti';
 import type { YouTubeSearchResult, CreateSongInput } from '../../types';
 import { IoSearch, IoMusicalNotes, IoArrowBack, IoPlay, IoCheckmark, IoLink } from 'react-icons/io5';
 import { extractArtistFromTitle, extractYouTubeVideoId } from '../../utils/helpers';
@@ -156,6 +157,9 @@ export function SongSearchModal({ isOpen, onClose, onSongAdded }: SongSearchModa
       };
 
       await addSong(songData);
+
+      // Trigger confetti celebration
+      triggerSideConfetti();
 
       // Notify parent to refresh
       if (onSongAdded) {

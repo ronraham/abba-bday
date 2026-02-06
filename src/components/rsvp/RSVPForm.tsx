@@ -3,6 +3,7 @@ import { Input } from '../common/Input';
 import { Textarea } from '../common/Textarea';
 import { Button } from '../common/Button';
 import { useRSVP } from '../../hooks/useRSVP';
+import { triggerConfetti } from '../../utils/confetti';
 import type { CreateRSVPInput } from '../../types';
 
 interface RSVPFormProps {
@@ -56,6 +57,11 @@ export function RSVPForm({ onRSVPAdded }: RSVPFormProps = {}) {
         attending: formData.attending,
         notes: formData.notes?.trim() || undefined,
       });
+
+      // Trigger confetti if attending
+      if (formData.attending) {
+        triggerConfetti();
+      }
 
       // Notify parent to refresh
       if (onRSVPAdded) {
