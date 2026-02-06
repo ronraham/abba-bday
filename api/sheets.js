@@ -2,16 +2,19 @@ import { google } from 'googleapis';
 
 // Initialize Google Sheets API
 const getSheets = () => {
-  // Handle private key - Vercel may store \n as literal or escaped
   let privateKey = process.env.GOOGLE_PRIVATE_KEY || '';
 
-  // Remove surrounding quotes if present
-  if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
-    privateKey = privateKey.slice(1, -1);
+  // Check if the key is base64 encoded (doesn't start with -----)
+  if (!privateKey.startsWith('-----')) {
+    // Decode from base64
+    privateKey = Buffer.from(privateKey, 'base64').toString('utf-8');
+  } else {
+    // Handle escaped newlines for non-base64 keys
+    if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+      privateKey = privateKey.slice(1, -1);
+    }
+    privateKey = privateKey.replace(/\\n/g, '\n');
   }
-
-  // Replace escaped newlines with actual newlines
-  privateKey = privateKey.replace(/\\n/g, '\n');
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
