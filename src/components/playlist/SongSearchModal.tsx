@@ -287,26 +287,26 @@ export function SongSearchModal({ isOpen, onClose, onSongAdded }: SongSearchModa
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {searchResults.map((result) => (
                 <Card key={result.id}>
-                  <div className="flex gap-4 items-start">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <img
                       src={result.thumbnailUrl}
                       alt={result.title}
-                      className="w-32 h-24 object-cover border-2 border-dark"
+                      className="w-full sm:w-28 h-auto sm:h-20 object-cover border-2 border-dark flex-shrink-0"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg line-clamp-2">{result.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1">{result.channelTitle}</p>
-                      <div className="flex gap-2 mt-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-sm sm:text-base line-clamp-2">{result.title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-1 truncate">{result.channelTitle}</p>
+                      <div className="flex gap-2 mt-2 sm:mt-3">
                         <Button
                           variant="secondary"
                           onClick={() => handlePreviewSong(result)}
-                          className="text-sm"
+                          className="text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
                         >
                           <IoPlay className="inline mr-1" /> Preview
                         </Button>
                         <Button
                           onClick={() => handleSelectSong(result)}
-                          className="text-sm"
+                          className="text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
                         >
                           <IoCheckmark className="inline mr-1" /> Select
                         </Button>

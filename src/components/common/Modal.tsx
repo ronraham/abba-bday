@@ -45,23 +45,23 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full ${sizeClasses[size]} transform overflow-hidden bg-cream border-4 border-dark shadow-vintage-lg transition-all`}
+                className={`w-full ${sizeClasses[size]} transform overflow-hidden bg-cream border-2 sm:border-4 border-dark shadow-vintage-lg transition-all max-h-[90vh] flex flex-col`}
               >
                 {title && (
-                  <div className="flex items-center justify-between border-b-2 border-dark p-6 bg-white">
-                    <Dialog.Title className="text-2xl font-display font-bold">
+                  <div className="flex items-center justify-between border-b-2 border-dark p-4 sm:p-6 bg-white flex-shrink-0">
+                    <Dialog.Title className="text-lg sm:text-2xl font-display font-bold pr-4">
                       {title}
                     </Dialog.Title>
                     <button
                       onClick={onClose}
-                      className="text-dark hover:text-vintage-orange transition-colors"
+                      className="text-dark hover:text-vintage-orange transition-colors flex-shrink-0"
                       aria-label="Close modal"
                     >
-                      <IoClose size={28} />
+                      <IoClose size={24} className="sm:w-7 sm:h-7" />
                     </button>
                   </div>
                 )}
-                <div className="p-6">{children}</div>
+                <div className="p-4 sm:p-6 overflow-y-auto flex-1">{children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
