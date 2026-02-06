@@ -2,9 +2,10 @@
  * Main storage service export
  *
  * This is the single point where we choose which storage implementation to use.
- * To switch from localStorage to Supabase, simply change the import here.
+ * Currently using Google Sheets as the backend via Google Apps Script.
  */
-export { storageService } from './localStorageService';
+export { storageService } from './googleSheetsService';
 
-// Future: When Supabase is ready, uncomment below and comment out above:
-// export { storageService } from './supabaseService';
+// Alternative implementations:
+// export { storageService } from './localStorageService'; // Browser-only, no sync
+// export { storageService } from './supabaseService'; // Future option
